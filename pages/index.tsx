@@ -1,4 +1,50 @@
-export function Index() {
+import getConfig from "next/config";
+import Link from "next/link";
+import Organisasi from "./organisasi";
+
+const dms = getConfig().publicRuntimeConfig.DMS;
+
+export async function getServerSideProps() {
+  const response = await fetch(
+    `${dms}/api/3/action/group_list?all_fields=true`
+  );
+  const grup = await response.json();
+  const grupDetail = grup.result;
+
+  const getDataOrganisasi = await fetch(
+    `${dms}/api/3/action/organization_list?all_fields=true`
+  );
+  const DataOrganisasi = await getDataOrganisasi.json();
+  const Organisasi = DataOrganisasi.result;
+
+  const getDataSets = await fetch(`${dms}/api/3/action/package_list`);
+  const dataDataSets = await getDataSets.json();
+  const datasets = dataDataSets.result;
+
+  const defaultValues = {
+    name: "URL Grup",
+    image_url: "/assets/image/deliserdang.svg",
+    title: "Nama Grup",
+    package_count: "0",
+  };
+
+  const tampilGrup = grupDetail.map((grupValue) => ({
+    name: grupValue.name || defaultValues.name,
+    image_url: grupValue.image_url || defaultValues.image_url,
+    title: grupValue.title || defaultValues.title,
+    package_count: grupValue.package_count || defaultValues.package_count,
+  }));
+
+  return {
+    props: {
+      grup: tampilGrup,
+      organisasi: Organisasi,
+      hitungData: datasets,
+    },
+  };
+}
+
+export function Index({ grup, organisasi, hitungData }) {
   return (
     <>
       {/* Hero */}
@@ -10,9 +56,8 @@ export function Index() {
                 Satu Data Indonesia <br /> Kabupaten Deli Serdang
               </h1>
               <p className="mb-4  md:text-base sm:text-sm text-xs animate__animated animate__fadeInUp animate__delay-1s">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusamus facilis eius ratione cumque aliquid perspiciatis a
-                facere quo optio assumenda.
+                Temukan data-data Pemerintah Kabupaten Deli Serdang dengan
+                mudah!
               </p>
               <p className="mb-4  md:text-base sm:text-sm text-xs animate__animated animate__fadeInUp animate__delay-1s">
                 <input
@@ -43,7 +88,7 @@ export function Index() {
                     </svg>
                   </div>
                   <div className="stat-title">Datasets</div>
-                  <div className="stat-value">31K</div>
+                  <div className="stat-value">{hitungData.length}</div>
                   <div className="stat-desc">Jan 1st - Feb 1st</div>
                 </div>
 
@@ -64,7 +109,7 @@ export function Index() {
                     </svg>
                   </div>
                   <div className="stat-title">Organisasi</div>
-                  <div className="stat-value">4,200</div>
+                  <div className="stat-value">{organisasi.length}</div>
                   <div className="stat-desc">↗︎ 400 (22%)</div>
                 </div>
 
@@ -84,8 +129,8 @@ export function Index() {
                       ></path>
                     </svg>
                   </div>
-                  <div className="stat-title">Pengguna</div>
-                  <div className="stat-value">1,200</div>
+                  <div className="stat-title">Group</div>
+                  <div className="stat-value">{grup.length}</div>
                   <div className="stat-desc">↘︎ 90 (14%)</div>
                 </div>
               </div>
@@ -105,48 +150,54 @@ export function Index() {
       {/* Card Setelah Hero */}
       <div className="kartu-navigasi">
         <div className="container flex lg:flex-row flex-col items-center mx-auto p-4 justify-center">
-          <div className="card card-normal w-auto bg-base-100 shadow-xl mx-5 my-5 hover:bg-base-300 cursor-pointer">
-            <figure className="px-10 pt-10">
-              <img
-                src="/assets/image/5613.jpg"
-                alt="Shoes"
-                className="rounded-xl w-[100px]"
-              />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h4 className="card-title font-extrabold">TEMUKAN DATA</h4>
-              <p>Temukan kumpulan data dan dapatkan wawasan dari data.</p>
-              <div className="card-actions"></div>
+          <Link href="/datasets">
+            <div className="card card-normal w-auto bg-base-100 shadow-xl mx-5 my-5 hover:bg-base-300 cursor-pointer">
+              <figure className="px-10 pt-10">
+                <img
+                  src="/assets/image/5613.jpg"
+                  alt="Shoes"
+                  className="rounded-xl w-[100px]"
+                />
+              </figure>
+              <div className="card-body items-center text-center">
+                <h4 className="card-title font-extrabold">TEMUKAN DATA</h4>
+                <p>Temukan kumpulan data dan dapatkan wawasan dari data.</p>
+                <div className="card-actions"></div>
+              </div>
             </div>
-          </div>
-          <div className="card card-normal w-auto bg-base-100 shadow-xl mx-5 my-5 hover:bg-base-300 cursor-pointer">
-            <figure className="px-10 pt-10">
-              <img
-                src="/assets/image/4760012.jpg"
-                alt="Shoes"
-                className="rounded-xl w-[100px]"
-              />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h4 className="card-title font-extrabold">ORGANISASI</h4>
-              <p>Temukan Data Perangkat Daerah Di Portal</p>
-              <div className="card-actions"></div>
+          </Link>
+          <Link href="/organisasi">
+            <div className="card card-normal w-auto bg-base-100 shadow-xl mx-5 my-5 hover:bg-base-300 cursor-pointer">
+              <figure className="px-10 pt-10">
+                <img
+                  src="/assets/image/4760012.jpg"
+                  alt="Shoes"
+                  className="rounded-xl w-[100px]"
+                />
+              </figure>
+              <div className="card-body items-center text-center">
+                <h4 className="card-title font-extrabold">ORGANISASI</h4>
+                <p>Temukan Data Perangkat Daerah Di Portal</p>
+                <div className="card-actions"></div>
+              </div>
             </div>
-          </div>
-          <div className="card card-normal w-auto bg-base-100 shadow-xl mx-5 my-5 hover:bg-base-300 cursor-pointer">
-            <figure className="px-10 pt-10">
-              <img
-                src="/assets/image/Na_Dec_02.jpg"
-                alt="Shoes"
-                className="rounded-xl w-[100px]"
-              />
-            </figure>
-            <div className="card-body items-center text-center">
-              <h4 className="card-title font-extrabold">GRUP</h4>
-              <p>Telusuri kumpulan data berdasarkan kategori</p>
-              <div className="card-actions"></div>
+          </Link>
+          <Link href="/grup">
+            <div className="card card-normal w-auto bg-base-100 shadow-xl mx-5 my-5 hover:bg-base-300 cursor-pointer">
+              <figure className="px-10 pt-10">
+                <img
+                  src="/assets/image/Na_Dec_02.jpg"
+                  alt="Shoes"
+                  className="rounded-xl w-[100px]"
+                />
+              </figure>
+              <div className="card-body items-center text-center">
+                <h4 className="card-title font-extrabold">GRUP</h4>
+                <p>Telusuri kumpulan data berdasarkan kategori</p>
+                <div className="card-actions"></div>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -207,68 +258,29 @@ export function Index() {
                 Blanditiis, laboriosam?
               </p>
             </div>
-            <div className="box flex justify-center items-center flex-wrap gap-4 pt-16">
-              <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
-                <img
-                  src="/assets/image/deliserdang.svg"
-                  alt="services1"
-                  className="w-[150px] h-[100px] p-4"
-                />
-                <h5 className="font-bold items-center justify-center text-center mb-2">
-                  Ekonomi
-                </h5>
+
+            {grup && grup.length > 0 ? (
+              <div className="box flex justify-center items-center flex-wrap gap-4 pt-16">
+                {grup.map((grup, k) => (
+                  <Link key={k} href={`/grup/${grup.name}`}>
+                    <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
+                      <img
+                        src={grup.image_url}
+                        alt="services1"
+                        className="w-[150px] h-[100px] p-4"
+                      />
+                      <h5 className="font-bold items-center justify-center text-center mb-2">
+                        {grup.title}
+                      </h5>
+                    </div>
+                  </Link>
+                ))}
               </div>
-              <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
-                <img
-                  src="/assets/image/deliserdang.svg"
-                  alt="services1"
-                  className="w-[150px] h-[100px] p-4"
-                />
-                <h5 className="font-bold items-center justify-center text-center mb-2">
-                  Pendidikan
-                </h5>
-              </div>
-              <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
-                <img
-                  src="/assets/image/deliserdang.svg"
-                  alt="services1"
-                  className="w-[150px] h-[100px] p-4"
-                />
-                <h5 className="font-bold items-center justify-center text-center mb-2">
-                  Sosial
-                </h5>
-              </div>
-              <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
-                <img
-                  src="/assets/image/deliserdang.svg"
-                  alt="services1"
-                  className="w-[150px] h-[100px] p-4"
-                />
-                <h5 className="font-bold items-center justify-center text-center mb-2">
-                  Pariwisata
-                </h5>
-              </div>
-              <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
-                <img
-                  src="/assets/image/deliserdang.svg"
-                  alt="services1"
-                  className="w-[150px] h-[100px] p-4"
-                />
-                <h5 className="font-bold items-center justify-center text-center mb-2">
-                  Penduduk
-                </h5>
-              </div>
-              <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
-                <img
-                  src="/assets/image/deliserdang.svg"
-                  alt="services1"
-                  className="w-[150px] h-[100px] p-4"
-                />
-                <h5 className="font-bold items-center justify-center text-center mb-2">
-                  Pertanian
-                </h5>
-              </div>
-            </div>
+            ) : (
+              <p className="bg-base-300 m-5 p-5 text-4xl font-bold ">
+                Tidak Ada Grup
+              </p>
+            )}
           </div>
         </div>
       </div>
