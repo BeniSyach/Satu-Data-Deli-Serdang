@@ -1,6 +1,8 @@
 import getConfig from "next/config";
 import Link from "next/link";
 import Organisasi from "./organisasi";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useRouter } from "next/router";
 
 const dms = getConfig().publicRuntimeConfig.DMS;
 
@@ -45,6 +47,20 @@ export async function getServerSideProps() {
 }
 
 export function Index({ grup, organisasi, hitungData }) {
+  const [CariDataSets, setCariDataSets] = useState("");
+  const router = useRouter();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCariDataSets(e.target.value);
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (CariDataSets.trim() !== "") {
+      router.push(`/Pencarian?query=${encodeURIComponent(CariDataSets)}`);
+    }
+  };
+
   return (
     <>
       {/* Hero */}
@@ -59,17 +75,22 @@ export function Index({ grup, organisasi, hitungData }) {
                 Temukan data-data Pemerintah Kabupaten Deli Serdang dengan
                 mudah!
               </p>
-              <p className="mb-4  md:text-base sm:text-sm text-xs animate__animated animate__fadeInUp animate__delay-1s">
-                <input
-                  type="text"
-                  placeholder="Cari Data Anda"
-                  className="input input-bordered input-accent w-full max-w-xs"
-                />
-              </p>
-              <button className="bg-slate-900 hover:bg-slate-950 text-slate-500 w-48 h-12 rounded-lg font-bold  animate__animated animate__fadeInUp animate__delay-1s">
-                Cari <i className="fa-solid fa-question ml-1"></i>
-              </button>
+              <form onSubmit={handleSubmit}>
+                <p className="mb-4  md:text-base sm:text-sm text-xs animate__animated animate__fadeInUp animate__delay-1s">
+                  <input
+                    type="text"
+                    placeholder="Cari Data Anda"
+                    className="input input-bordered input-accent w-full max-w-xs"
+                    value={CariDataSets}
+                    onChange={handleChange}
+                  />
+                </p>
+                <button className=" bg-slate-900 hover:bg-slate-950 text-slate-500 w-48 h-12 rounded-lg font-bold  animate__animated animate__fadeInUp animate__delay-1s">
+                  Cari <i className="fa-solid fa-question ml-1"></i>
+                </button>
+              </form>
               {/* Stats */}
+              <br />
               <div className="border stats sm:stats-horizontal stats-vertical shadow mt-10 animate__animated animate__fadeInUp animate__delay-1s">
                 <div className="stat">
                   <div className="stat-figure text-secondary">
