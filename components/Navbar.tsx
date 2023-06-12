@@ -126,10 +126,10 @@ const Navbar: React.FC = () => {
             </ul>
           </li> */}
           <li>
-            <a href="/grup">Grup</a>
+            <a href="/organisasi">Organisasi</a>
           </li>
           <li>
-            <a href="/organisasi">Organisasi</a>
+            <a href="/grup">Grup</a>
           </li>
           <li>
             <a href="/about">Tentang Kami</a>

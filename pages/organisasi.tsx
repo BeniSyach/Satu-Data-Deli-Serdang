@@ -32,6 +32,7 @@ export async function getServerSideProps() {
 }
 
 export function Organisasi({ organisasi }) {
+  console.log(organisasi);
   return (
     <>
       <div className="hero min-h-[50%] bg-base-200">
@@ -61,37 +62,37 @@ export function Organisasi({ organisasi }) {
           <button className="btn btn-primary">Cari</button>
         </div>
       </div>
-      <div className="flex flex-row flex-wrap justify-center items-center">
-        {organisasi && organisasi.length > 0 ? (
-          <div>
-            {organisasi.map((organisasi, k) => (
-              <Link key={k} href={`/organisasi/${organisasi.name}`}>
-                <div className="card w-60 bg-base-100 shadow-xl m-2 cursor-pointer hover:bg-base-300">
-                  <figure className="px-10 pt-10">
-                    <img
-                      src={organisasi.image_url}
-                      alt="Logo OPD"
-                      className="rounded-md w-[100px]"
-                    />
-                  </figure>
-                  <div className="card-body items-center text-center">
-                    <h2 className="card-title text-sm">{organisasi.title}</h2>
-                    <div className="card-actions">
-                      <div className="badge badge-primary">
-                        {organisasi.package_count} Datasets
-                      </div>
+
+      {organisasi && organisasi.length > 0 ? (
+        <div className="flex flex-row flex-wrap justify-center items-center">
+          {organisasi.map((organisasi, k) => (
+            <Link key={k} href={`/organisasi/${organisasi.name}`}>
+              <div className="card w-60 bg-base-100 shadow-xl m-2 cursor-pointer hover:bg-base-300">
+                <figure className="px-10 pt-10">
+                  <img
+                    src={`https://data.deliserdangkab.go.id/uploads/group/${organisasi.image_url}`}
+                    alt="Logo OPD"
+                    className="rounded-md w-[100px]"
+                  />
+                </figure>
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title text-sm">{organisasi.title}</h2>
+                  <div className="card-actions">
+                    <div className="badge badge-primary">
+                      {organisasi.package_count} Datasets
                     </div>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="bg-base-300 m-5 p-5 text-4xl font-bold ">
-            Tidak Ada Organisasi
-          </p>
-        )}
-      </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="bg-base-300 m-5 p-5 text-4xl font-bold ">
+          Tidak Ada Organisasi
+        </p>
+      )}
+
       <div></div>
     </>
   );

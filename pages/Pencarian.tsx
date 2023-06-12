@@ -32,10 +32,7 @@ export const getServerSideProps: GetServerSideProps<DataProps> = async ({
   query,
 }) => {
   const cari = query.query;
-  // const response = await fetch(`${dms}/api/3/action/package_search?q=${cari}`);
-  const response = await fetch(
-    `https://data.serdangbedagaikab.go.id/api/3/action/package_search?q=${cari}`
-  );
+  const response = await fetch(`${dms}/api/3/action/package_search?q=${cari}`);
   const data = await response.json();
   const datacari: list[] = data.result.results;
   return {
