@@ -32,7 +32,6 @@ export async function getServerSideProps() {
 }
 
 export function Organisasi({ organisasi }) {
-  console.log(organisasi);
   return (
     <>
       <div className="hero min-h-[50%] bg-base-200">

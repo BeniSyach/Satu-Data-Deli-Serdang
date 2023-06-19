@@ -78,7 +78,7 @@ const Navbar: React.FC = () => {
               <a href="/about">Tentang Kami</a>
             </li>
             <li>
-              <a href="/auth/login">Login</a>
+              <a href="https://data.deliserdangkab.go.id/user/login">Login</a>
             </li>
           </ul>
         </div>
@@ -137,7 +137,10 @@ const Navbar: React.FC = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a href="/auth/login" className="btn md:flex hidden mr-8">
+        <a
+          href="https://data.deliserdangkab.go.id/user/login"
+          className="btn md:flex hidden mr-8"
+        >
           Login
         </a>
         <label className=" swap swap-rotate ">
