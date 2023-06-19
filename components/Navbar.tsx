@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../contexts/ThemeContext";
 
 const Navbar: React.FC = () => {
   // const toggleTheme = () => {
@@ -13,8 +12,6 @@ const Navbar: React.FC = () => {
   //     htmlElement.setAttribute("data-theme", "cupcake");
   //   }
   // };
-
-  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className="navbar top-0 left-0 right-0 z-10  p-4 bg-transparent">
@@ -148,7 +145,6 @@ const Navbar: React.FC = () => {
           <input
             type="checkbox"
             // checked={theme === "dark"}
-            onChange={toggleTheme}
           />
           {/* <!-- sun icon --> */}
           <svg
