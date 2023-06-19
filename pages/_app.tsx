@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import LayoutLogin from "../components/login/LayoutLogin";
 import React from "react";
 import LayoutDashboard from "../components/backend/LayoutDashboard";
-import { ThemeProvider } from "../contexts/ThemeContext";
 
 const CustomApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
@@ -45,7 +44,7 @@ const CustomApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     }
 
     return (
-      <ThemeProvider>
+      <>
         <Head>
           <title>Satu Data Kabupaten Deli Serdang</title>
           {/* Font Awesome */}
@@ -78,7 +77,7 @@ const CustomApp: React.FC<AppProps> = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </main>
         <Footer />
-      </ThemeProvider>
+      </>
     );
   };
   return getLayout();
