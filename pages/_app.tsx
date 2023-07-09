@@ -47,6 +47,25 @@ const CustomApp: React.FC<AppProps> = ({ Component, pageProps }) => {
       <>
         <Head>
           <title>Satu Data Kabupaten Deli Serdang</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+            key="Satu Data Deli Serdang,Satu-Data-Deli-Serdang"
+          />
+          <meta
+            name="keyword"
+            content="Satu Data Deli Serdang, Satu Data, Portal Satu Data Deli Serdang, Web Satu Data Deli Serdang"
+          />
+          <meta
+            name="description"
+            content="Portal Resmi Satu Data Deli Serdang"
+          />
+          <link
+            rel="icon"
+            href="https://deliserdangkab.go.id/logonya.png"
+            sizes="any"
+          />
+
           {/* Font Awesome */}
           <link
             rel="stylesheet"
