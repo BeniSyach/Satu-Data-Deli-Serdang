@@ -32,6 +32,7 @@ export async function getServerSideProps() {
 }
 
 export function Grup({ grup }) {
+  console.log(grup);
   return (
     <>
       <div className="hero min-h-[50%] bg-base-200">
@@ -39,9 +40,11 @@ export function Grup({ grup }) {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold mt-10">Grup</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Grup digunakan untuk membuat dan mengelola koleksi set data. Ini
+              bisa untuk membuat katalog kumpulan data untuk proyek atau tim
+              tertentu, atau pada tema tertentu, atau sebagai cara yang sangat
+              sederhana untuk membantu orang menemukan dan menelusuri kumpulan
+              data Anda yang diterbitkan.
             </p>
           </div>
         </div>
@@ -61,37 +64,36 @@ export function Grup({ grup }) {
           <button className="btn btn-primary">Cari</button>
         </div>
       </div>
-      <div className="flex flex-row flex-wrap justify-center items-center">
-        {grup && grup.length > 0 ? (
-          <div>
-            {grup.map((grup, k) => (
-              <Link key={k} href={`/grup/${grup.name}`}>
-                <div className="card w-60 bg-base-100 shadow-xl m-2 cursor-pointer hover:bg-base-300">
-                  <figure className="px-10 pt-10">
-                    <img
-                      src={grup.image_url}
-                      alt="Logo Grup"
-                      className="rounded-md w-[100px]"
-                    />
-                  </figure>
-                  <div className="card-body items-center text-center">
-                    <h2 className="card-title text-sm">{grup.title}</h2>
-                    <div className="card-actions">
-                      <div className="badge badge-primary">
-                        {grup.package_count} datasets
-                      </div>
+
+      {grup && grup.length > 0 ? (
+        <div className="flex flex-row flex-wrap justify-center items-center">
+          {grup.map((grup, k) => (
+            <Link key={k} href={`/grup/${grup.name}`}>
+              <div className="card w-60 bg-base-100 shadow-xl m-2 cursor-pointer hover:bg-base-300">
+                <figure className="px-10 pt-10">
+                  <img
+                    src={`https://data.deliserdangkab.go.id/uploads/group/${grup.image_url}`}
+                    alt="Logo Grup"
+                    className="rounded-md w-[100px]"
+                  />
+                </figure>
+                <div className="card-body items-center text-center">
+                  <h2 className="card-title text-sm">{grup.title}</h2>
+                  <div className="card-actions">
+                    <div className="badge badge-primary">
+                      {grup.package_count} datasets
                     </div>
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="bg-base-300 m-5 p-5 text-4xl font-bold ">
-            Tidak Ada Grup
-          </p>
-        )}
-      </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="bg-base-300 m-5 p-5 text-4xl font-bold ">
+          Tidak Ada Grup
+        </p>
+      )}
     </>
   );
 }

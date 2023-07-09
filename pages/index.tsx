@@ -1,9 +1,7 @@
 import getConfig from "next/config";
 import Link from "next/link";
-import Organisasi from "./organisasi";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import ErrorText from "../components/Typography/ErrorText";
 
 const dms = getConfig().publicRuntimeConfig.DMS;
 
@@ -115,7 +113,6 @@ export function Index({ grup, organisasi, hitungData }) {
                   </div>
                   <div className="stat-title">Datasets</div>
                   <div className="stat-value">{hitungData.length}</div>
-                  <div className="stat-desc">Jan 1st - Feb 1st</div>
                 </div>
 
                 <div className="stat">
@@ -136,7 +133,6 @@ export function Index({ grup, organisasi, hitungData }) {
                   </div>
                   <div className="stat-title">Organisasi</div>
                   <div className="stat-value">{organisasi.length}</div>
-                  <div className="stat-desc">↗︎ 400 (22%)</div>
                 </div>
 
                 <div className="stat">
@@ -157,7 +153,6 @@ export function Index({ grup, organisasi, hitungData }) {
                   </div>
                   <div className="stat-title">Group</div>
                   <div className="stat-value">{grup.length}</div>
-                  <div className="stat-desc">↘︎ 90 (14%)</div>
                 </div>
               </div>
             </div>
@@ -236,11 +231,12 @@ export function Index({ grup, organisasi, hitungData }) {
                 Satu Data Deli Serdang
               </h1>
               <p className="md:w-3/4 w-full mx-auto md:text-base sm:text-sm text-xs">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Quisquam eos maxime quibusdam saepe nobis. Provident, alias
-                commodi? Saepe cum eaque fugiat ducimus repellendus illo error
-                dignissimos. Nemo voluptate, modi obcaecati doloremque, corporis
-                provident quos officiis quasi ea quas, libero sint.
+                Satu Data Indonesia adalah kebijakan data pemerintah untuk
+                menghasilkan tata Kelola data yang akurat, mutakhir, terpadu,
+                dan dapat dipertanggungjawabkan, serta mudah diakses dan
+                dibagipakaikan antar Instansi Pusat dan Daerah melalui pemenuhan
+                Standar Data, Metadata, Interoperabilitas Data, dan menggunakan
+                kode referensi dan data induk.
               </p>
             </div>
             <div className="box grid md:grid-cols-2 grid-cols-1 gap-16 pt-16 items-center">
@@ -251,20 +247,23 @@ export function Index({ grup, organisasi, hitungData }) {
               />
               <div className="deskripsi md:justify-self-start justify-self-center">
                 <p className="flex items-center gap-4 text-xl font-bold mb-6">
-                  <i className="fa-solid fa-circle-check text-4xl text-teal-600"></i>
-                  Lorem ipsum dolor sit amet.
+                  Prinsip Satu Data Indonesia adalah sebagai berikut:
                 </p>
                 <p className="flex items-center gap-4 text-xl font-bold mb-6">
                   <i className="fa-solid fa-circle-check text-4xl text-teal-600"></i>
-                  Lorem ipsum dolor sit amet consectetur adipisicing.
+                  Standar Data
                 </p>
                 <p className="flex items-center gap-4 text-xl font-bold mb-6">
                   <i className="fa-solid fa-circle-check text-4xl text-teal-600"></i>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Metadata
                 </p>
                 <p className="flex items-center gap-4 text-xl font-bold mb-6">
                   <i className="fa-solid fa-circle-check text-4xl text-teal-600"></i>
-                  Lorem ipsum dolor sit amet consectetur.
+                  Interoperabilitas Data
+                </p>
+                <p className="flex items-center gap-4 text-xl font-bold mb-6">
+                  <i className="fa-solid fa-circle-check text-4xl text-teal-600"></i>
+                  Kode Referensi dan Data Induk
                 </p>
               </div>
             </div>
@@ -280,8 +279,8 @@ export function Index({ grup, organisasi, hitungData }) {
             <div className="box text-center">
               <h1 className="font-extrabold text-4xl mb-6">Grups</h1>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Blanditiis, laboriosam?
+                Grup digunakan untuk membuat dan mengelola koleksi set data. Ini
+                bisa untuk membuat katalog kumpulan data
               </p>
             </div>
 
@@ -290,11 +289,13 @@ export function Index({ grup, organisasi, hitungData }) {
                 {grup.map((grup, k) => (
                   <Link key={k} href={`/grup/${grup.name}`}>
                     <div className="card card-normal w-auto bg-base-100 shadow-xl mx-1 my-1 hover:bg-slate-700 cursor-pointer">
-                      <img
-                        src={grup.image_url}
-                        alt="services1"
-                        className="w-[150px] h-[100px] p-4"
-                      />
+                      <figure className="px-10 pt-10">
+                        <img
+                          src={`https://data.deliserdangkab.go.id/uploads/group/${grup.image_url}`}
+                          alt="services1"
+                          className="rounded-md w-[100px]"
+                        />
+                      </figure>
                       <h5 className="font-bold items-center justify-center text-center mb-2">
                         {grup.title}
                       </h5>
@@ -319,8 +320,8 @@ export function Index({ grup, organisasi, hitungData }) {
             <div className="box text-center">
               <h1 className="font-extrabold text-4xl mb-6">Kontak Kami</h1>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Voluptatibus, modi.
+                Jika anda memiliki pertanyaan seputar Satu Data Kabupaten Deli
+                Serdang, silahkan menghubungi kami.
               </p>
             </div>
             <form

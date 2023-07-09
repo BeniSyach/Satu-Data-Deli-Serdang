@@ -71,9 +71,9 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold mt-10">Cari Datasets!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Temukan data-data Pemerintahan Kabupaten Deli Serdang dengan
+              mudah!
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </p>
           </div>
           <div className="card w-full justify-center items-center shadow-2xl bg-base-100">
@@ -154,12 +154,19 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
                 {organisasi && organisasi.length > 0 ? (
                   <div className="w-60">
                     {organisasi.map((data, k) => (
-                      <div key={k} className="form-control">
+                      <div
+                        key={k}
+                        className="grid gap-2 grid-cols-1 form-control"
+                      >
                         <label className="label cursor-pointer">
-                          <input type="checkbox" className="checkbox" />
-                          <span className="label-text truncate truncate-words">
+                          <span className="label-text text-left mr-2">
                             {data.title}
+                            {/* <span className="badge badge-lg badge-primary text-sm">
+                              {data.package_count}
+                            </span> */}
                           </span>
+
+                          <input type="checkbox" className="checkbox" />
                         </label>
                       </div>
                     ))}
@@ -175,10 +182,10 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
                     {grup.map((datagrup, k) => (
                       <div key={k} className="form-control">
                         <label className="label cursor-pointer">
-                          <input type="checkbox" className="checkbox" />
                           <span className="label-text truncate truncate-words">
                             {datagrup.title}
                           </span>
+                          <input type="checkbox" className="checkbox" />
                         </label>
                       </div>
                     ))}
@@ -190,23 +197,23 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
               <div className="judul-item flex flex-col text-start pl-5">
                 <p className="text-md font-bold p-2">Kata Kunci</p>
               </div>
-              <div className="judul-item flex flex-row flex-wrap text-center p-3">
-                {tags && tags.length > 0 ? (
-                  <div>
-                    {tags.map((dataTags, k) => (
-                      <div
-                        key={k}
-                        className="badge badge-primary m-2 p-2 cursor-pointer"
-                      >
-                        {dataTags.title}
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p>Data Tags Tidak Ada</p>
-                )}
-              </div>
+
+              {tags && tags.length > 0 ? (
+                <div className="judul-item flex flex-row flex-wrap text-center p-3">
+                  {tags.map((dataTags, k) => (
+                    <div
+                      key={k}
+                      className="text-xs badge badge-primary m-1 p-1 cursor-pointer"
+                    >
+                      {dataTags.name}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>Data Tags Tidak Ada</p>
+              )}
             </div>
+
             <div className="divider divider-horizontal"></div>
             <div className="grid h-auto flex-grow card bg-base-300 rounded-box place-items-start">
               <div className="judul-item">
@@ -224,9 +231,10 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
                           <div className="card card-side bg-base-100 shadow-xl w-full mb-5 cursor-pointer hover:bg-base-200">
                             <figure>
                               <img
-                                src={dataset.organization.image_url}
+                                src="https://deliserdangkab.go.id/files/website_resmi.png"
                                 alt="logo Datasets"
-                                className="lg:w-[100px] sm:w-[50px] p-5"
+                                // className="lg:w-[200px] sm:w-[100px] p-5"
+                                className="w-full"
                               />
                             </figure>
                             <div className="card-body">
@@ -238,7 +246,7 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
                               </p>
                               <div className="card-actions justify-start">
                                 <span className="badge badge-lg badge-primary text-sm">
-                                  {dataset.author}
+                                  {dataset.organization.title}
                                 </span>
                                 <span className="badge badge-lg badge-primary text-sm">
                                   {formatter.format(

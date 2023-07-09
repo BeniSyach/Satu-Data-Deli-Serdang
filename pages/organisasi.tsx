@@ -39,9 +39,10 @@ export function Organisasi({ organisasi }) {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold mt-10">Organisasi</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Organisasi digunakan untuk membuat, mengelola, dan menerbitkan
+              kumpulan dataset. Pengguna dapat memiliki peran berbeda dalam
+              Organisasi, bergantung pada tingkat otorisasi mereka untuk
+              membuat, mengedit, dan memublikasikan.
             </p>
           </div>
         </div>
