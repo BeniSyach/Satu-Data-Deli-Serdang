@@ -1,9 +1,18 @@
 import getConfig from "next/config";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
-import Title from "../components/Typography/Title";
+import Organisasi from "./organisasi";
+import {
+  CKAN,
+  DatasetSearchForm,
+  ListOfDatasets,
+  PackageSearchOptions,
+  Organization,
+  Group,
+} from "@portaljs/ckan";
 
 const dms = getConfig().publicRuntimeConfig.DMS;
+const backend_url = getConfig().publicRuntimeConfig.DMS;
 
 const formatter = new Intl.DateTimeFormat(["ban", "id"], {
   year: "numeric",
@@ -42,17 +51,37 @@ export async function getServerSideProps() {
   const dataTags = await getDataTags.json();
   const Tags = dataTags.result;
 
+  const ckan = new CKAN(backend_url);
+  const groups = await ckan.getGroupsWithDetails();
+  const orgs = await ckan.getOrgsWithDetails();
+
   return {
     props: {
       datasets: datasetsWithDetails,
       organisasi: Organisasi,
       grup: Grup,
       tags: Tags,
+      groups,
+      orgs,
     },
   };
 }
 
-export default function datasetsPage({ datasets, organisasi, grup, tags }) {
+export default function datasetsPage({
+  orgs,
+  groups,
+  datasets,
+  organisasi,
+  grup,
+  tags,
+}: {
+  orgs: Organization[];
+  groups: Group[];
+  datasets: any;
+  organisasi: any;
+  grup: any;
+  tags: any;
+}) {
   const [selectedGrup, setSelectedGrup] = useState("");
   const [selectedOrganisasi, setSelectedOrganisasi] = useState("");
 
@@ -63,6 +92,15 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
   const handleSetSelectedOrganisasi = (event) => {
     setSelectedOrganisasi(event.target.value);
   };
+
+  const ckan = new CKAN(backend_url);
+  const [options, setOptions] = useState<PackageSearchOptions>({
+    offset: 0,
+    limit: 5,
+    tags: [],
+    groups: [],
+    orgs: [],
+  });
 
   return (
     <>
@@ -82,13 +120,8 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
                 <label className="label">
                   <span className="label-text">Cari Datasets</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="Cari Datasets Anda"
-                  className="input input-bordered"
-                />
               </div>
-              <div className="form-control">
+              {/* <div className="form-control">
                 <label className="label">
                   <span className="label-text">Group</span>
                 </label>
@@ -138,7 +171,13 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
               </div>
               <div className="form-control mt-9">
                 <button className="btn btn-primary">Cari</button>
-              </div>
+              </div> */}
+              <DatasetSearchForm
+                options={options}
+                setOptions={setOptions}
+                groups={groups}
+                orgs={orgs}
+              />
             </div>
           </div>
         </div>
@@ -213,10 +252,9 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
                 <p>Data Tags Tidak Ada</p>
               )}
             </div>
-
             <div className="divider divider-horizontal"></div>
-            <div className="grid h-auto flex-grow card bg-base-300 rounded-box place-items-start">
-              <div className="judul-item">
+            <div className="grid h-auto  card bg-base-300 rounded-box place-items-start">
+              {/* <div className="judul-item">
                 <p className="flex text-4xl font-bold text-md p-5">
                   {datasets.length} Datasets
                 </p>
@@ -270,7 +308,12 @@ export default function datasetsPage({ datasets, organisasi, grup, tags }) {
                 <button className="btn">«</button>
                 <button className="btn">Halaman 1</button>
                 <button className="btn">»</button>
-              </div>
+              </div> */}
+              <ListOfDatasets
+                options={options}
+                setOptions={setOptions}
+                ckan={ckan}
+              />{" "}
             </div>
           </div>
         </div>
