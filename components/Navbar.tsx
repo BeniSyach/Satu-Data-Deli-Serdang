@@ -92,7 +92,7 @@ const Navbar: React.FC = () => {
           {/* Satu Data Kabupaten Deli Serdang */}
         </a>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center  lg:flex md:hidden">
         <ul className="menu menu-horizontal px-1">
           <li>
             <a href="/">Beranda</a>
@@ -136,7 +136,7 @@ const Navbar: React.FC = () => {
       <div className="navbar-end">
         <a
           href="https://data.deliserdangkab.go.id/user/login"
-          className="btn md:flex hidden mr-8"
+          className="btn md:flex sm:hidden mr-8"
         >
           Login
         </a>

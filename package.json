@@ -18,6 +18,7 @@
     "@portaljs/remark-embed": "^1.0.4",
     "@portaljs/remark-wiki-link": "^1.0.4",
     "isomorphic-unfetch": "^4.0.2",
+    "mddb": "^0.1.9",
     "aos": "^2.3.4",
     "daisyui": "^2.51.6",
     "next": "13.3.1",
