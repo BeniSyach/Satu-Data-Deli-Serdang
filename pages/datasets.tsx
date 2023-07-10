@@ -8,6 +8,7 @@ import {
   Organization,
   Group,
 } from "@portaljs/ckan";
+import "@portaljs/ckan/styles.css";
 
 const dms = getConfig().publicRuntimeConfig.DMS;
 const backend_url = getConfig().publicRuntimeConfig.DMS;
@@ -80,7 +81,7 @@ export default function datasetsPage({
   const ckan = new CKAN(backend_url);
   const [options, setOptions] = useState<PackageSearchOptions>({
     offset: 0,
-    limit: 5,
+    limit: 10,
     tags: [],
     groups: [],
     orgs: [],
@@ -187,7 +188,7 @@ export default function datasetsPage({
                   options={options}
                   setOptions={setOptions}
                   ckan={ckan}
-                />{" "}
+                />
               </div>
             </div>
           </div>
