@@ -82,7 +82,7 @@ export function Index({ grup, organisasi, hitungData }) {
                   <input
                     type="text"
                     placeholder="Cari Data Anda"
-                    className="input input-bordered input-accent w-full max-w-xs"
+                    className="input input-bordered input-primary w-full max-w-xs"
                     value={CariDataSets}
                     onChange={handleChange}
                   />
@@ -239,7 +239,7 @@ export function Index({ grup, organisasi, hitungData }) {
                 kode referensi dan data induk.
               </p>
             </div>
-            <div className="box grid md:grid-cols-2 grid-cols-1 gap-16 pt-16 items-center">
+            <div className="box grid lg:grid-cols-2 grid-cols-1 gap-16 pt-16 items-center">
               <img
                 src="assets/image/6263.jpg"
                 alt="service"
