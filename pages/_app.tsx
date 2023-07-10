@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import LayoutLogin from "../components/login/LayoutLogin";
 import React from "react";
 import LayoutDashboard from "../components/backend/LayoutDashboard";
+import "@portaljs/ckan/styles.css";
 
 const CustomApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();

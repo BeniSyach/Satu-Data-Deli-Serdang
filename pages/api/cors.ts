@@ -1,11 +1,11 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from "isomorphic-unfetch";
 
 const Cors = async (req: any, res: any) => {
   const { url } = req.query;
   try {
     const resProxy = await fetch(url, {
       headers: {
-        Range: 'bytes=0-5132288',
+        Range: "bytes=0-5132288",
       },
     });
     const data = await resProxy.text();
