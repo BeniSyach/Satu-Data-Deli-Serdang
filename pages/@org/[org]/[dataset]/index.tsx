@@ -64,6 +64,7 @@ const positions = [
 ];
 
 export default function DatasetPage({ dataset }) {
+  console.log(dataset);
   return (
     <div className="overflow-hidden bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -171,6 +172,12 @@ export default function DatasetPage({ dataset }) {
                           </div>
                         </div>
                       </div>
+                    </a>
+                    <a
+                      href={`https://data.deliserdangkab.go.id/dataset/${resource.package_id}/resource/${resource.id}`}
+                      className="font-bold my-2 ml-5 flex items-center text-sm text-gray-500 badge badge-ghost"
+                    >
+                      Detail Data
                     </a>
                   </li>
                 ))}
