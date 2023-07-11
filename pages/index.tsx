@@ -94,7 +94,7 @@ export function Index({ grup, organisasi, hitungData }) {
               </form>
               {/* Stats */}
               <br />
-              <div className="border stats sm:stats-horizontal stats-vertical shadow mt-10 animate__animated animate__fadeInUp animate__delay-1s">
+              <div className="border bg-primary stats sm:stats-horizontal stats-vertical shadow mt-10 animate__animated animate__fadeInUp animate__delay-1s">
                 <div className="stat">
                   <div className="stat-figure text-secondary">
                     <svg
@@ -111,7 +111,7 @@ export function Index({ grup, organisasi, hitungData }) {
                       ></path>
                     </svg>
                   </div>
-                  <div className="stat-title">Datasets</div>
+                  <div className="stat-title text-base-200">Datasets</div>
                   <div className="stat-value">{hitungData.length}</div>
                 </div>
 
