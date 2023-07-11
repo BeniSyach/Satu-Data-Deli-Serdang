@@ -32,7 +32,6 @@ export async function getServerSideProps() {
 }
 
 export function Grup({ grup }) {
-  console.log(grup);
   return (
     <>
       <div className="hero min-h-[50%] bg-base-200">
